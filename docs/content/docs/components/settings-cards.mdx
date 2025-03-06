@@ -15,26 +15,27 @@ By default, the built-in [`<AuthCard />`](/components/auth-card) component autom
 To use your own custom settings route and avoid using the default included settings card, you can specify the `settingsUrl` prop within your [`<AuthUIProvider>`](/components/auth-ui-provider) configuration:
 
 ```tsx title="app/providers.tsx"
-import { AuthUIProvider } from "@daveyplate/better-auth-ui"
-import { authClient } from "@/lib/auth-client"
-import { useRouter } from "next/navigation"
-import Link from "next/link"
+import { AuthUIProvider } from "@daveyplate/better-auth-ui";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export function Providers({ children }: { children: React.ReactNode }) {
-    const router = useRouter()
+  const router = useRouter();
 
-    return (
-        <AuthUIProvider
-            authClient={authClient}
-            navigate={router.push}
-            replace={router.replace}
-            onSessionChange={() => router.refresh()}
-            settingsUrl="/dashboard/settings"  // Your custom settings page URL
-            LinkComponent={Link}
-        >
-            {children}
-        </AuthUIProvider>
-    )
+  return (
+    <AuthUIProvider
+      authClient={authClient}
+      navigate={router.push}
+      replace={router.replace}
+      onSessionChange={() => router.refresh()}
+      settingsUrl="/dashboard/settings" // Your custom settings page URL
+      LinkComponent={Link}
+    >
+      {children}
+    </AuthUIProvider>
+  );
+}
 ```
 
 By setting the `settingsUrl` as shown above, the built-in `/auth/settings` page will also automatically redirect users to your specified `/dashboard/settings` page.
